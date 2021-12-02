@@ -6,20 +6,20 @@
     "esModuleInterop": true,
     "lib": [
       "dom",
-      "es2015"
+      "es2017"
     ],
     "jsx": "react-jsx",
     "target": "es5",
     "allowJs": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
   }
 }
