@@ -156,3 +156,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 Path(os.path.join(BASE_DIR, 'static')).mkdir(parents=True, exist_ok=True)
 Path(MEDIA_ROOT).mkdir(parents=True, exist_ok=True)
+
+# --
+
+TG_API_TOKEN = os.environ.get('TG_API_TOKEN', '1661706699:AAH8-SFKII4_lnNncbRZhGWRPJj1i4d1VTU')
+TG_CHANNEL_ID = os.environ.get('TG_CHANNEL_ID', '@plannerix_ai')

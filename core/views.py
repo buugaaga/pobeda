@@ -7,6 +7,8 @@ from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework import viewsets, permissions, status as http_status
 from rest_framework.response import Response
 
+from core import tools
+
 # Create your views here.
 
 
@@ -14,9 +16,13 @@ from rest_framework.response import Response
 @api_view(['GET'])
 @permission_classes((permissions.AllowAny,))
 def check_avail(request):
+    now = datetime.datetime.now()
+
     result = {
-        'datetime': datetime.datetime.now()
+        'datetime': now
     }
+
+    tools.send_telegram(f'check_avail: {now}')
 
     return Response(result, status=http_status.HTTP_200_OK)
 

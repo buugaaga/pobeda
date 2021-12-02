@@ -23,7 +23,6 @@ from django.urls import path, re_path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('core.urls')),
-    # re_path(r'^api(/v1)?/', include(('core.urls', 'core'), namespace='v1')),
 ]
 
 if bool(settings.DEBUG):
