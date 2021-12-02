@@ -22,7 +22,7 @@ services:
     volumes:
       - plx_postgres_data:/var/lib/postgresql/data/
     env_file:
-      - $HOME/api/DOCKER_BUILD/.api.env.prod.db
+      - $HOME/www/DOCKER_BUILD/.api.env.prod.db
 
   plx_web:
     container_name: web
@@ -36,8 +36,8 @@ services:
     expose:
       - 8000
     env_file:
-      - $HOME/api/DOCKER_BUILD/.api.env.prod
-    command: gunicorn plannerix_api.wsgi:application --bind 0.0.0.0:8000 --workers=3 --threads=2 --worker-class=gthread
+      - $HOME/www/DOCKER_BUILD/.api.env.prod
+    command: gunicorn oil.wsgi:application --bind 0.0.0.0:8000 --workers=3 --threads=2 --worker-class=gthread
     depends_on:
       - plx_db
 
