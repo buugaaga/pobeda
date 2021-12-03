@@ -1,4 +1,5 @@
 import { useTheme } from '@mui/material';
+import { useParams } from 'react-router';
 import { Map, Placemark, Circle } from 'react-yandex-maps';
 import { OIL_SPILS } from '../../mock/oilSpils';
 import { BASES, POINTS } from '../../mock/points';
@@ -25,13 +26,17 @@ export function BaseMap({
   bases = BASES,
   oilSpills = OIL_SPILS,
 }: YaProps) {
+  const { coordinates } = useParams()
+
+  const oilSpillCenter = coordinates && coordinates.split(',').map((item) => parseFloat(item))
+
   const theme = useTheme();
   const sky = theme.palette.info.dark;
   return (
     <Map
       width="100"
       height="75vh"
-      defaultState={{ center, zoom }}
+      state={{ center: oilSpillCenter || center, zoom }}
       modules={['control.ZoomControl', 'control.FullscreenControl']}
     >
       {/* <GeoObject
@@ -47,34 +52,35 @@ export function BaseMap({
           population: 11848762,
         }}
       /> */}
-      {oilSpills.map(({ cts, d, desc }, idx) => {
-        return (
-          <Circle
-            key={idx}
-            geometry={[cts, d]}
-            modules={['geoObject.addon.hint', 'geoObject.addon.balloon']}
-            properties={{
-              balloonContent: 'hi baby',
-              hintContent: desc || 'нет данных',
-            }}
-            options={{
-              fillColor: '#DB709377',
-              strokeColor: '#990066',
-              strokeOpacity: 0.8,
-              strokeWidth: 5,
-            }}
-            ballon={
-              <Placemark
-                geometry={[61.1, 69.35]}
-                options={{
-                  preset: 'islands#dotIcon',
-                  iconColor: 'red',
-                }}
-              />
-            }
-          />
-        );
-      })}
+      {oilSpills &&
+        oilSpills.map(({ cts, d, desc }, idx) => {
+          return (
+            <Circle
+              key={idx}
+              geometry={[cts, d]}
+              modules={['geoObject.addon.hint', 'geoObject.addon.balloon']}
+              properties={{
+                balloonContent: 'hi baby',
+                hintContent: desc || 'нет данных',
+              }}
+              options={{
+                fillColor: '#DB709377',
+                strokeColor: '#990066',
+                strokeOpacity: 0.8,
+                strokeWidth: 5,
+              }}
+              ballon={
+                <Placemark
+                  geometry={[61.1, 69.35]}
+                  options={{
+                    preset: 'islands#dotIcon',
+                    iconColor: 'red',
+                  }}
+                />
+              }
+            />
+          );
+        })}
       {drons &&
         drons.map((cts, idx) => (
           <Circle

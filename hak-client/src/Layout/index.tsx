@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import {  useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -18,9 +18,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { MainListItems, secondaryListItems } from '../components/ListItems';
-import { YaMap } from '../pages/YaMap';
 import { getTitle } from './utils';
 import { OilAlerts } from '../components/OilAlerts';
+import { MyRoutes } from './MyRoutes';
 
 function Copyright(props: any) {
   return (
@@ -86,7 +86,8 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 function DashboardContent() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
+  const [openAlert, setOpenAlert] = useState(false);
 
   const { pathname } = useLocation();
 
@@ -119,7 +120,7 @@ function DashboardContent() {
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
+              <NotificationsIcon onClick={() => setOpenAlert(!openAlert) }/>
             </Badge>
           </IconButton>
         </Toolbar>
@@ -165,13 +166,11 @@ function DashboardContent() {
                   height: '80vh',
                 }}
               >
-                <Routes>
-                  <Route path="/" element={<YaMap />} />
-                </Routes>
+                <MyRoutes />
               </Paper>
             </Grid>
           </Grid>
-          <OilAlerts />
+          <OilAlerts open={openAlert} setOpen={() => setOpenAlert(!openAlert)} />
           <Copyright sx={{ pt: 4 }} />
         </Container>
       </Box>
