@@ -41,4 +41,4 @@ class Command(BaseCommand):
                     lat=safe_cast(row[22].strip().replace(',', '.'), float),
                     )
 
-        print('DONE')
+        print('EXPORT DONE')
