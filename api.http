@@ -7,3 +7,14 @@ GET http://91.224.133.105:50680/api/check_avail
 Content-Type: application/json
 
 ###
+
+GET http://localhost:8000/api/reestr?bdate=25.05.2020&edate=31.12.2020
+Content-Type: application/json
+
+###
+
+
+GET http://localhost:8000/api/reestr/2520
+Content-Type: application/json
+
+###

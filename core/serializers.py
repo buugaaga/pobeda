@@ -1,15 +1,12 @@
 import json
 
 from rest_framework import serializers
-# from core.models import Plan, MetaObjects
+from core.models import Reestr
 
 
+class ReesrtSerializer(serializers.ModelSerializer):
 
-# class PlanSerializer(serializers.ModelSerializer):
-#     id = serializers.UUIDField(source='slug', required=False)
-   
-
-#     class Meta:
-#         model = Plan
-#         fields = '__all__'
-#         # exclude = ('image_url', 'slug')
+    class Meta:
+        model = Reestr
+        fields = '__all__'
+        # exclude = ('image_url', 'slug')
