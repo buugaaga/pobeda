@@ -25,3 +25,7 @@ Content-Type: application/json
 
 ###
 
+GET http://91.224.133.105:50680/api/airports
+Content-Type: application/json
+
+###
