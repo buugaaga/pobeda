@@ -20,6 +20,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { MainListItems, secondaryListItems } from '../components/ListItems';
 import { YaMap } from '../pages/YaMap';
 import { getTitle } from './utils';
+import { OilAlerts } from '../components/OilAlerts';
 
 function Copyright(props: any) {
   return (
@@ -156,7 +157,6 @@ function DashboardContent() {
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
-            {/* Chart */}
             <Grid item xs={12}>
               <Paper
                 sx={{
@@ -171,6 +171,7 @@ function DashboardContent() {
               </Paper>
             </Grid>
           </Grid>
+          <OilAlerts />
           <Copyright sx={{ pt: 4 }} />
         </Container>
       </Box>
