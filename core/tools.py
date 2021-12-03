@@ -20,3 +20,8 @@ def send_telegram(mess):
             raise Exception(ex)
 
     telegram(mess)
+
+
+def google_map(lat, lon, zoom=13, size='600x400'):
+    params = f'zoom={zoom}&size={size}&markers=color:red%7Clabel:C%7C{lat}%2C{lon}&key={settings.GOOGLE_MAP_KEY}'
+    return f'https://maps.googleapis.com/maps/api/staticmap?{params}'

@@ -27,3 +27,4 @@ class Reestr(TimeStampedModel):
 
     # col 22 - Широта
     lat = models.FloatField('Широта', default=None, null=True, blank=True)
+

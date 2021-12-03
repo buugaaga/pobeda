@@ -161,3 +161,7 @@ Path(MEDIA_ROOT).mkdir(parents=True, exist_ok=True)
 
 TG_API_TOKEN = os.environ.get('TG_API_TOKEN', '<TOKEN>')
 TG_CHANNEL_ID = os.environ.get('TG_CHANNEL_ID', '<CHANNEL>')
+
+# --
+
+GOOGLE_MAP_KEY = os.environ.get('GOOGLE_MAP_KEY', '<KEY>')
