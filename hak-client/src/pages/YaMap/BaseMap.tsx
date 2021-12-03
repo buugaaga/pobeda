@@ -1,6 +1,7 @@
 import { useTheme } from '@mui/material';
+import { color } from '@mui/system';
 import { useParams } from 'react-router';
-import { Map, Placemark, Circle } from 'react-yandex-maps';
+import { Map, Placemark, Circle, ZoomControl } from 'react-yandex-maps';
 import { OIL_SPILS } from '../../mock/oilSpils';
 import { BASES, POINTS } from '../../mock/points';
 import { OilSpill } from '../../types';
@@ -12,6 +13,7 @@ type YaProps = {
   oilSpills?: OilSpill[];
   drons?: number[][];
   bases?: number[][];
+  handleClickOnMap?: (e: any) => void
 };
 
 /**
@@ -25,33 +27,22 @@ export function BaseMap({
   drons = POINTS,
   bases = BASES,
   oilSpills = OIL_SPILS,
+  handleClickOnMap
 }: YaProps) {
-  const { coordinates } = useParams()
+  const { coordinates } = useParams();
 
-  const oilSpillCenter = coordinates && coordinates.split(',').map((item) => parseFloat(item))
+  const oilSpillCenter = coordinates && coordinates.split(',').map((item) => parseFloat(item));
 
   const theme = useTheme();
   const sky = theme.palette.info.dark;
   return (
     <Map
-      width="100"
-      height="75vh"
+      width="100%"
+      height="70vh"
       state={{ center: oilSpillCenter || center, zoom }}
-      modules={['control.ZoomControl', 'control.FullscreenControl']}
+      onClick={(e: any) => handleClickOnMap(e)}
     >
-      {/* <GeoObject
-        geometry={{
-          type: 'Point',
-          coordinates: [61.1, 69.35],
-        }}
-        modules={['geoObject.addon.hint', 'geoObject.addon.balloon']}
-        properties={{
-          hintContent: 'Moscow',
-          balloonContentHeader: 'Moscow',
-          balloonContentBody: 'Capital of Russia',
-          population: 11848762,
-        }}
-      /> */}
+      <ZoomControl />
       {oilSpills &&
         oilSpills.map(({ cts, d, desc }, idx) => {
           return (
