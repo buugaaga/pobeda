@@ -1,7 +1,5 @@
-import json
-
 from rest_framework import serializers
-from core.models import Reestr
+from core.models import Reestr, Airports
 from core import tools
 
 
@@ -10,8 +8,13 @@ class ReesrtSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reestr
-        # fields = '__all__'
         exclude = ('created', 'modified',)
 
     def get_map(self, obj):
         return tools.google_map(obj.lat, obj.lon)
+
+
+class AirportsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Airports
+        exclude = ('created', 'modified',)

@@ -10,8 +10,8 @@ from rest_framework import viewsets, permissions, status as http_status
 from rest_framework.response import Response
 
 from core import tools
-from core.serializers import ReesrtSerializer
-from core.models import Reestr
+from core.serializers import ReesrtSerializer, AirportsSerializer
+from core.models import Reestr, Airports
 
 # Create your views here.
 
@@ -54,3 +54,9 @@ class ReesrtViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(qs, many=True)
         return Response(serializer.data)
 
+
+class AirportsViewSet(viewsets.ModelViewSet):
+    serializer_class =AirportsSerializer
+    queryset = Airports.objects.all()    
+    authentication_classes = ()
+    permission_classes = ()
