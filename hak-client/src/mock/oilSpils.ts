@@ -5,25 +5,25 @@ export const OIL_SPILS: OilSpill[] = [
     id: '1',
     cts: [61.53, 69.122],
     d: 3000,
-    desc: 'some description'
+    desc: 'разлив возле озера'
   },
   {
     id: '2',
     cts: [61.5, 69.022],
     d: 5000,
-    desc: 'some description'
+    desc: 'огромный разлив, большой ущерб'
   },
   {
     id: '3',
     cts: [61.73, 69.222],
     d: 300,
-    desc: 'some description'
+    desc: 'что то похожее на разлив'
   },
   {
     id: '4',
     cts: [61.03, 69.222],
     d: 1000,
-    desc: 'some description'
+    desc: 'разлив, нужно выдвижение'
   }
 ]
 //[61, 69], [61.1, 69.05], [61.03, 69.11]

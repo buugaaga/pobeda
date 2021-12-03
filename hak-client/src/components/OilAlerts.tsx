@@ -17,7 +17,7 @@ export const OilAlerts = ({ oilSpills = OIL_SPILS, open, setOpen }: Props) => {
   //   return null;
   // }
   return (
-    <Box sx={{ width: '30vw' }} position="absolute" top={20} right={20}>
+    <Box sx={{ width: '30vw' }} position="absolute" top={70} right={20}>
       <Collapse in={open}>
         {oilSpills.map(({ id, desc, cts }) => {
           return (
