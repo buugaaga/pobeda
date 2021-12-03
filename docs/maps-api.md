@@ -6,21 +6,32 @@
 ```javascript
 {
   center: Coordinates, // центра карты по дефолту или по какому либо запросу
-  drons: {
-    cts: Coordinates[], // координаты дронов
-    dsc: string, // Марка или название дрона
-  },
-  base: {
-    cts: Coordinates[], // место нахождения группы обнаружения
-    dsc: string, // описание
-  },
+  drons: Drons[],
+  base: BaseGroup[],
 }
 ```
 
-/api/maps/oil-spills
+------------------------
+/api/maps/oil-spills?startDate=date
 
 `GET`
 
 ```javascript
 OilSpills[] // Массив объектов из разливов
 ```
+- date - фильтровать по дате (минимальное значение)
+
+------------------------
+/api/maps/oil-spills/alerts
+
+При появлении нового пятна добавлять его в этот массив
+
+`GET`
+
+```javascript
+OilSpills[] 
+```
+
+/api/maps/oil-spills/alerts/${id}
+`DELETE`
+
