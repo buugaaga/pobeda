@@ -1,9 +1,11 @@
 export type Coordinates = number[]
 
 export type OilSpill = {
+  id: string;
   cts: number[];
   d: number
   desc?: string
+  date?: string
 }
 
 export type MapsData = {
@@ -18,8 +20,9 @@ export type MapsData = {
   }[];
 }
 
-export type OilSpillAlert = {
-  cts: Coordinates;
-  dsc: string;
-  date: string;
-}
+// export type OilSpillAlert = {
+//   id: string
+//   cts: Coordinates;
+//   dsc: string;
+//   date: string;
+// }
