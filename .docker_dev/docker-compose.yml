@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+
+  api_db_image:
+    container_name: api-db
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data_api:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=hack_api
+      - POSTGRES_USER=hack_api
+      - POSTGRES_PASSWORD=hack_passwd
+
+volumes:
+  postgres_data_api:
