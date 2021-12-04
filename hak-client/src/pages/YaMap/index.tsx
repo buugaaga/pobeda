@@ -7,14 +7,17 @@ import { BaseMap } from './BaseMap';
 import { MapForm } from './MapForm';
 import { apiFetch } from '../../apiFetch';
 
-export const YaMap = () => {
+export const YaMap = ({ zoom }: { zoom?: number }) => {
   const [mark, setMark] = useState(false);
   const [cts, setCts] = useState(null);
 
   const queryClient = useQueryClient();
-  const { isLoading, data: oilSpills } = useQuery('repoData', () =>
+  const { data: oilSpills } = useQuery('repoData', () =>
     apiFetch('/api/reestr?bdate=25.05.2020&edate=31.12.2020')
   );
+
+  // const { data: airports } = useQuery('repoData', () => apiFetch('/api/airports'));
+  // console.log(airports);
 
   const handleClickOnMap = (e: any) => {
     if (!mark) {
@@ -25,11 +28,14 @@ export const YaMap = () => {
       setCts(cts);
     }
   };
-  if (!oilSpills) {
+  if (
+    !oilSpills
+    // || !airports
+  ) {
     return <div>Loading...</div>;
   }
   return (
-    <YMaps query={{ csp: isLoading }}>
+    <YMaps>
       <Modal
         open={Boolean(cts)}
         onClose={() => setCts(null)}
@@ -42,7 +48,7 @@ export const YaMap = () => {
         {mark ? 'Работать с картой' : 'Отметить местность'}
       </Button>
       <Box sx={{ width: '100%' }}>
-        <BaseMap handleClickOnMap={handleClickOnMap} oilSpills={oilSpills} />
+        <BaseMap handleClickOnMap={handleClickOnMap} oilSpills={oilSpills} zoom={zoom} />
       </Box>
     </YMaps>
   );

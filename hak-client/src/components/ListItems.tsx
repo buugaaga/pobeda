@@ -32,7 +32,7 @@ export const MainListItems = () => {
         </ListItemIcon>
         <ListItemText primary="Аналитика" />
       </ListItem>
-      <ListItem button onClick={() => navigate('/control')}>
+      {/* <ListItem button onClick={() => navigate('/control')}>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
@@ -43,7 +43,7 @@ export const MainListItems = () => {
           <LayersIcon />
         </ListItemIcon>
         <ListItemText primary="Интеграция" />
-      </ListItem>
+      </ListItem> */}
     </div>
   )
 }

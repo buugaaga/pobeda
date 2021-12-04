@@ -29,7 +29,7 @@ export function BaseMap({
   oilSpills,
   handleClickOnMap,
 }: YaProps) {
-  const { coordinates } = useParams();
+  const { coordinates, zoomParam } = useParams();
 
   const oilSpillCenter = coordinates
     ? coordinates.split(',').map((item) => parseFloat(item))
@@ -53,7 +53,7 @@ export function BaseMap({
         }}
       >
         {oilSpills &&
-          oilSpills.map(({ id, lat, lon, category, area }) => {
+          oilSpills.map(({ id, lat, lon, category, area, map, location }) => {
             const cts = [[Number(lat.toFixed(3)), Number(lon.toFixed(3))], Math.round(area * 1000)];
 
             return (
@@ -62,7 +62,7 @@ export function BaseMap({
                 geometry={cts}
                 modules={['geoObject.addon.hint', 'geoObject.addon.balloon']}
                 properties={{
-                  balloonContent: 'hi baby',
+                  balloonContent: `<a href="${map}"" target="_blank">Посмотреть снимки ${location}</a>`,
                   hintContent: category || 'нет данных',
                 }}
                 options={{
@@ -71,15 +71,6 @@ export function BaseMap({
                   strokeOpacity: 0.8,
                   strokeWidth: 5,
                 }}
-                // ballon={
-                //   <Placemark
-                //     geometry={[61.1, 69.35]}
-                //     options={{
-                //       preset: 'islands#dotIcon',
-                //       iconColor: 'red',
-                //     }}
-                //   />
-                // }
               />
             );
           })}

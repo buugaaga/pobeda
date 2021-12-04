@@ -11,6 +11,8 @@ export const MyRoutes = () => {
       <Route path="/" element={<YaMap />}>
         <Route path="map" element={<YaMap />}>
           <Route path=":coordinates" element={<YaMap />} />
+          {/* <Route path=":zoom" element={<YaMap />} />
+          </Route> */}
         </Route>
       </Route>
       <Route path="/dashboard" element={<Dashboard />} />
