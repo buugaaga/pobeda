@@ -1,17 +1,17 @@
 import { Alert, Box, Collapse, IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
-import { OIL_SPILS } from '../mock/oilSpils';
+import { OIL_SPILS_ALERT } from '../mock/oilSpils';
 // import { useQuery } from 'react-query';
-import { OilSpill } from '../types';
+import { OilSpillAlert } from '../types';
 
 type Props = {
-  oilSpills?: OilSpill[];
+  oilSpills?: OilSpillAlert[];
   open: boolean;
   setOpen: () => void;
 };
 
-export const OilAlerts = ({ oilSpills = OIL_SPILS, open, setOpen }: Props) => {
+export const OilAlerts = ({ oilSpills = OIL_SPILS_ALERT, open, setOpen }: Props) => {
   // const { data } = useQuery<OilSpillAlert[]>('/api/maps/oil-spills/alerts');
   // if (!data) {
   //   return null;
@@ -19,7 +19,7 @@ export const OilAlerts = ({ oilSpills = OIL_SPILS, open, setOpen }: Props) => {
   return (
     <Box sx={{ width: '30vw' }} position="absolute" top={70} right={20}>
       <Collapse in={open}>
-        {oilSpills.map(({ id, desc, cts }) => {
+        {oilSpills && oilSpills.map(({ id, cts, desc}) => {
           return (
             <Alert
               key={id}

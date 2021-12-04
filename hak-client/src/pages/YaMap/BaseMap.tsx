@@ -1,8 +1,8 @@
 import { useTheme } from '@mui/material';
-import { color } from '@mui/system';
 import { useParams } from 'react-router';
-import { Map, Placemark, Circle, ZoomControl } from 'react-yandex-maps';
-import { OIL_SPILS } from '../../mock/oilSpils';
+import { Map, Placemark, Circle, ZoomControl, Clusterer } from 'react-yandex-maps';
+import { DateTime } from 'luxon';
+// import { OIL_SPILS } from '../../mock/oilSpils';
 import { BASES, POINTS } from '../../mock/points';
 import { OilSpill } from '../../types';
 
@@ -13,7 +13,7 @@ type YaProps = {
   oilSpills?: OilSpill[];
   drons?: number[][];
   bases?: number[][];
-  handleClickOnMap?: (e: any) => void
+  handleClickOnMap?: (e: any) => void;
 };
 
 /**
@@ -23,15 +23,17 @@ type YaProps = {
  */
 export function BaseMap({
   center = [61.06, 69.02],
-  zoom = 11,
+  zoom = 7,
   drons = POINTS,
   bases = BASES,
-  oilSpills = OIL_SPILS,
-  handleClickOnMap
+  oilSpills,
+  handleClickOnMap,
 }: YaProps) {
   const { coordinates } = useParams();
 
-  const oilSpillCenter = coordinates && coordinates.split(',').map((item) => parseFloat(item));
+  const oilSpillCenter = coordinates
+    ? coordinates.split(',').map((item) => parseFloat(item))
+    : undefined;
 
   const theme = useTheme();
   const sky = theme.palette.info.dark;
@@ -43,35 +45,45 @@ export function BaseMap({
       onClick={(e: any) => handleClickOnMap(e)}
     >
       <ZoomControl />
-      {oilSpills &&
-        oilSpills.map(({ cts, d, desc }, idx) => {
-          return (
-            <Circle
-              key={idx}
-              geometry={[cts, d]}
-              modules={['geoObject.addon.hint', 'geoObject.addon.balloon']}
-              properties={{
-                balloonContent: 'hi baby',
-                hintContent: desc || 'нет данных',
-              }}
-              options={{
-                fillColor: '#DB709377',
-                strokeColor: '#990066',
-                strokeOpacity: 0.8,
-                strokeWidth: 5,
-              }}
-              ballon={
-                <Placemark
-                  geometry={[61.1, 69.35]}
-                  options={{
-                    preset: 'islands#dotIcon',
-                    iconColor: 'red',
-                  }}
-                />
-              }
-            />
-          );
-        })}
+
+      <Clusterer
+        options={{
+          preset: 'islands#invertedVioletClusterIcons',
+          groupByCoordinates: false,
+        }}
+      >
+        {oilSpills &&
+          oilSpills.map(({ id, lat, lon, category, area }) => {
+            const cts = [[Number(lat.toFixed(3)), Number(lon.toFixed(3))], Math.round(area * 1000)];
+
+            return (
+              <Circle
+                key={id}
+                geometry={cts}
+                modules={['geoObject.addon.hint', 'geoObject.addon.balloon']}
+                properties={{
+                  balloonContent: 'hi baby',
+                  hintContent: category || 'нет данных',
+                }}
+                options={{
+                  fillColor: '#DB709377',
+                  strokeColor: '#990066',
+                  strokeOpacity: 0.8,
+                  strokeWidth: 5,
+                }}
+                // ballon={
+                //   <Placemark
+                //     geometry={[61.1, 69.35]}
+                //     options={{
+                //       preset: 'islands#dotIcon',
+                //       iconColor: 'red',
+                //     }}
+                //   />
+                // }
+              />
+            );
+          })}
+      </Clusterer>
       {drons &&
         drons.map((cts, idx) => (
           <Circle

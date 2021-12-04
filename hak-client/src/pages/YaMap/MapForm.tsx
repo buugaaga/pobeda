@@ -14,7 +14,7 @@ export const MapForm = ({ cts }: Props) => {
     },
 
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      console.log(values)
     },
   });
   return (

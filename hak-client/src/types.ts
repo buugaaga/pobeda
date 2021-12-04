@@ -1,12 +1,22 @@
 export type Coordinates = number[]
 
 export type OilSpill = {
-  id: string;
-  cts: number[];
-  d: number
-  desc?: string
-  date?: string
+  area: number;
+  category: string
+  id: number;
+  lat: number
+  location: string;
+  lon: number
+  map: string // url image
+  reg_date: string // date
 }
+// export type OilSpill = {
+//   id: string;
+//   cts: number[];
+//   d: number
+//   desc?: string
+//   date?: string
+// }
 
 export type MapsData = {
   center: Coordinates;
@@ -20,9 +30,10 @@ export type MapsData = {
   }[];
 }
 
-// export type OilSpillAlert = {
-//   id: string
-//   cts: Coordinates;
-//   dsc: string;
-//   date: string;
-// }
+export type OilSpillAlert = {
+  id: string;
+  cts: number[];
+  d: number
+  desc?: string
+  date?: string
+}

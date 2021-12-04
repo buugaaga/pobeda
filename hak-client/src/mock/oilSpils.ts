@@ -1,6 +1,6 @@
-import { OilSpill } from "../types";
+import { OilSpillAlert } from "../types";
 
-export const OIL_SPILS: OilSpill[] = [
+export const OIL_SPILS_ALERT: OilSpillAlert[] = [
   {
     id: '1',
     cts: [61.53, 69.122],

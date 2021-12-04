@@ -2,16 +2,19 @@ import { useState } from 'react';
 import { Button, Modal } from '@mui/material';
 import { Box } from '@mui/system';
 import { YMaps } from 'react-yandex-maps';
-// import {  useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { BaseMap } from './BaseMap';
 import { MapForm } from './MapForm';
+import { apiFetch } from '../../apiFetch';
 
 export const YaMap = () => {
   const [mark, setMark] = useState(false);
-  // const [form, setForm] = useState(false);
   const [cts, setCts] = useState(null);
-  // const { data } = useQuery('repoData', () => fetch('/api/maps').then((res) => res.json()));
-  // console.log(data)
+
+  const queryClient = useQueryClient();
+  const { isLoading, data: oilSpills } = useQuery('repoData', () =>
+    apiFetch('/api/reestr?bdate=25.05.2020&edate=31.12.2020')
+  );
 
   const handleClickOnMap = (e: any) => {
     if (!mark) {
@@ -22,8 +25,11 @@ export const YaMap = () => {
       setCts(cts);
     }
   };
+  if (!oilSpills) {
+    return <div>Loading...</div>;
+  }
   return (
-    <YMaps>
+    <YMaps query={{ csp: isLoading }}>
       <Modal
         open={Boolean(cts)}
         onClose={() => setCts(null)}
@@ -36,7 +42,7 @@ export const YaMap = () => {
         {mark ? 'Работать с картой' : 'Отметить местность'}
       </Button>
       <Box sx={{ width: '100%' }}>
-        <BaseMap handleClickOnMap={handleClickOnMap} />
+        <BaseMap handleClickOnMap={handleClickOnMap} oilSpills={oilSpills} />
       </Box>
     </YMaps>
   );
