@@ -1,11 +1,13 @@
 ### Pobeda
 
 Проект разбит на три репозитория
+
 - Backend
-- Frontent 
+- Frontent
 - Neural network
 
 =================
+
 #### hak-client
 
 Для запуска фронтенда приложения в режиме разработки
@@ -24,7 +26,9 @@
 `yarn start`
 
 ##### Интсрументы
+
 На фронте используются следующие инструменты
+
 - typescript
 - React
 - React router
@@ -35,11 +39,16 @@
 
 ======================
 
-#### Нейронка
+#### Нейронка (notebook)
+
 Для нейронки нужно
-`Jupyter notebook ide`  для ipynb
+
+перейти в репозиторий `notebook`
+
+`Jupyter notebook ide` для ipynb
 
 Библиотеки
+
 - numpy
 - torch
 
